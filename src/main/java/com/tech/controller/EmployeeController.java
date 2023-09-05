@@ -4,6 +4,7 @@ import com.tech.dto.EmployeeDto;
 import com.tech.exception.EmployeeNotFoundException;
 import com.tech.model.Employee;
 import com.tech.service.EmployeeService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@Slf4j
 public class EmployeeController {
 
     @Autowired
@@ -26,6 +28,7 @@ public class EmployeeController {
     public ResponseEntity<Employee> saveEmployeeData(@RequestBody @Valid EmployeeDto employee)
     {
         Employee emp = employeeservice.saveEmployee(employee);
+        log.info("employee saved successfully");
         return new ResponseEntity<Employee>(emp, HttpStatus.CREATED);
     }
     @GetMapping("/getAllEmployee")
